@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <!-- logo -->
+      <h2 class="logo"><img src="./steam01.png" alt="" /> Speam</h2>
+      <!-- 導覽列 +登入按鈕-->
+      <nav class="navigation">
+        <button id="download-btn" class="btnLogin-popup1">下載Speam</button>
+        <a href="#">商店</a>
+        <a href="#">社群</a>
+        <a href="#">關於</a>
+        <a href="#">客服中心</a>
+        <button class="btnLogin-popup">登入</button>
+      </nav>
+    </header>
+
+    <div class="wrapper">
+      <span class="icon-close">
+        <ion-icon name="close"></ion-icon>
+      </span>
+      <!-- --------------------登入頁面---------------------------- -->
+      <div class="form-box login">
+        <h2>登入</h2>
+        <form action="#">
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <input type="email" id="torokuEm" required />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"> </ion-icon>
+            </span>
+            <input type="password" id="torokupassword" required />
+            <label>Password</label>
+          </div>
+          <div class="remember-fprgot">
+            <label><input type="checkbox" /> 記住</label>
+            <a href="#" id="passwordwasureta">忘記密碼</a>
+          </div>
+          <button type="submit" class="btntoroku">登入</button>
+          <div class="login-register">
+            <p>沒有帳號?<a href="#" class="register-link">點我創建</a></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- ///////////////////註冊頁面////////////////// -->
+      <div class="form-box register">
+        <h2>註冊</h2>
+        <form action="#">
+          <div class="input-box">
+            <!-- 註冊的icon  -->
+            <span class="icon">
+              <ion-icon name="person"></ion-icon>
+            </span>
+            <input type="text" id="Us" required />
+            <label>Username</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail-unread"></ion-icon>
+            </span>
+            <input type="email" id="Em" required />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"> </ion-icon>
+            </span>
+            <input type="password" id="Ps" required />
+            <label>Password</label>
+          </div>
+          <!-- <div class="remember-fprgot">
+            <label><input type="checkbox" /> 我同意</label>
+          </div> -->
+          <button type="submit" class="btnregister">創建</button>
+          <div class="login-register">
+            <p>已經有帳號了?<a href="#" class="login-link">登入</a></p>
+          </div>
+        </form>
+      </div>
+
+    <!-- 註冊給資料庫 -->
+    <script>
+      $(".btnregister").click(function () {
+        var registerUs = $("#Us").val();
+        var registerEm = $("#Em").val();
+        var passwordPs = $("#Ps").val();
+
+        var xhr = new XMLHttpRequest();
+        // url 資料庫
+        var url = "http://10.0.101.191:8080/users/register";
+        var data = {
+          userName: registerUs,
+          email: registerEm,
+          password: passwordPs,
+        };
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            // 處理後端返回的數據
+          }
+        };
+        xhr.send(JSON.stringify(data));
+      });
+    </script>
+
+    <script src="script.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
